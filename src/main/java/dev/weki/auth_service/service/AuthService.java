@@ -52,10 +52,6 @@ public class AuthService {
         Authentication authentication = authenticationManager.authenticate(token);
         String accessToken = tokenService.generateToken(authentication);
 
-        UserEntity user = userRepository
-                .findByEmail(authentication.getName())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        return new TokenRecord(userMapper.toUserRecord(user), "Bearer", accessToken);
+        return new TokenRecord("Bearer", accessToken);
     }
 }
