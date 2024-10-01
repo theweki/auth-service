@@ -6,12 +6,9 @@ import dev.weki.auth_service.utility.GenericResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -23,12 +20,33 @@ public class UserController {
     @PostMapping("/current")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasAuthority('SCOPE_USER')")
-    public GenericResponse<UserRecord> getUserByToken() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public GenericResponse<UserRecord> getCurrentUserDetails() {
         return new GenericResponse<>(
                 HttpStatus.OK.value(),
                 "User Fetched Successfully",
-                userService.getUserByEmail(authentication.getName())
+                userService.getUser()
+        );
+    }
+
+    @GetMapping("/friends")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('SCOPE_USER')")
+    public GenericResponse<List<UserRecord>> getFriends() {
+        return new GenericResponse<>(
+                HttpStatus.OK.value(),
+                "User Friends Fetched Successfully",
+                userService.getFriends()
+        );
+    }
+
+    @PatchMapping("/friends/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('SCOPE_USER')")
+    public GenericResponse<String> addFriend(@PathVariable String email) {
+        return new GenericResponse<>(
+                HttpStatus.OK.value(),
+                "User Friend Added Successfully",
+                userService.addFriend(email)
         );
     }
 

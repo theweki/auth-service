@@ -12,10 +12,8 @@ public class UserMapper {
                 userEntity.getId(),
                 userEntity.getName(),
                 userEntity.getEmail(),
-                userEntity.getContact(),
-                userEntity.getRole(),
-                userEntity.getFriends(),
-                userEntity.getGroups()
+                userEntity.getContact()
         );
     }
+
 }
