@@ -33,5 +33,5 @@ build/
 .vscode/
 
 ### Resources ###
+.env
 /src/main/resources/certs/
-/src/main/resources/application.properties

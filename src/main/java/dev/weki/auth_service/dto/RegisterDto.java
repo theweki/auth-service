@@ -20,6 +20,6 @@ public class RegisterDto {
     @Size(min = 2, message = "Name must be minimum of 2 characters")
     private String name;
 
-    @Pattern(regexp = "^[0-9]{10}$", message = "Invalid Contact")
+    @Pattern(regexp = "^(\\d{10}|\\d{3}-\\d{3}-\\d{4})$", message = "Invalid Contact")
     private String contact;
 }

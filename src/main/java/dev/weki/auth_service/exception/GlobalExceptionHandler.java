@@ -25,6 +25,12 @@ public class GlobalExceptionHandler {
         return genericError(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
+    @ExceptionHandler(UserDoesNotExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<GenericError<String>> handleUserDoesNotExistsException(UserDoesNotExistsException e) {
+        return genericError(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
     @ExceptionHandler(NoResourceFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<GenericError<String>> handleNoResourceFoundException(NoResourceFoundException e) {

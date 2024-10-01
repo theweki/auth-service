@@ -1,11 +1,12 @@
 package dev.weki.auth_service.controller;
 
+import dev.weki.auth_service.dto.FriendDto;
 import dev.weki.auth_service.dto.UserRecord;
 import dev.weki.auth_service.service.UserService;
 import dev.weki.auth_service.utility.GenericResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,6 @@ public class UserController {
 
     @PostMapping("/current")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAuthority('SCOPE_USER')")
     public GenericResponse<UserRecord> getCurrentUserDetails() {
         return new GenericResponse<>(
                 HttpStatus.OK.value(),
@@ -30,7 +30,6 @@ public class UserController {
 
     @GetMapping("/friends")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAuthority('SCOPE_USER')")
     public GenericResponse<List<UserRecord>> getFriends() {
         return new GenericResponse<>(
                 HttpStatus.OK.value(),
@@ -39,14 +38,13 @@ public class UserController {
         );
     }
 
-    @PatchMapping("/friends/{email}")
+    @PatchMapping("/friends")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAuthority('SCOPE_USER')")
-    public GenericResponse<String> addFriend(@PathVariable String email) {
+    public GenericResponse<FriendDto> addFriend(@Valid @RequestBody FriendDto friendDto) {
         return new GenericResponse<>(
                 HttpStatus.OK.value(),
                 "User Friend Added Successfully",
-                userService.addFriend(email)
+                userService.addFriend(friendDto)
         );
     }
 

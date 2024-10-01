@@ -1,29 +1,26 @@
 package dev.weki.auth_service;
 
 import dev.weki.auth_service.security.RSAKeyProperties;
-import dev.weki.auth_service.model.Role;
-import dev.weki.auth_service.model.UserEntity;
-import dev.weki.auth_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 @RequiredArgsConstructor
 @EnableConfigurationProperties(RSAKeyProperties.class)
 public class AuthServiceApplication {
 
-	private final UserRepository userRepository;
-	private final PasswordEncoder passwordEncoder;
+	/* ADMIN AND USER DEPENDENCIES
+	private final UserRepository _;
+	private final PasswordEncoder _;
+	*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(AuthServiceApplication.class, args);
 	}
 
+	/* ADMIN AND USER
 	@Bean
 	CommandLineRunner commandLineRunner() {
     	return _ -> {
@@ -48,4 +45,5 @@ public class AuthServiceApplication {
 			userRepository.save(user);
 		};
 	}
+	*/
 }
