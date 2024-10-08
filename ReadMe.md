@@ -6,3 +6,4 @@
     SERVER_PORT=8100
     SPRING_DATA_MONGODB_URI=mongodb://localhost:27017/auth-service
 
+### Uncomment @Component in MongoSeeder Java File for Populating Mongo Data
