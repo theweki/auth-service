@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.4</version>
+		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.weki</groupId>
@@ -67,6 +67,19 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+<!--	spring-boot-starter-test has vulnerability in xmlunit-core:2.9.x -->
+<!--	so changed it to xmlunit-core:2.10.0 -->
+<!--	remove this if change parent.version -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.xmlunit</groupId>
+				<artifactId>xmlunit-core</artifactId>
+				<version>2.10.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
