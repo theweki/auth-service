@@ -8,7 +8,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
-
 @Service
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
