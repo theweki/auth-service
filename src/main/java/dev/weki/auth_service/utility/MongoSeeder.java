@@ -4,20 +4,24 @@ import dev.weki.auth_service.model.Role;
 import dev.weki.auth_service.model.UserEntity;
 import dev.weki.auth_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-// @Configuration
+@Service
 @RequiredArgsConstructor
 public class MongoSeeder implements CommandLineRunner {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public void run(String... args) {
+    @Value("${mongo.seed}")
+    private boolean seed;
+
+    private void populate() {
         userRepository.deleteAll();
 
         UserEntity admin = UserEntity.builder()
@@ -56,7 +60,13 @@ public class MongoSeeder implements CommandLineRunner {
                 .email("gamma@gmail.com")
                 .build();
 
+
         userRepository.saveAll(List.of(admin, user, alpha, beta, gamma));
     }
 
+    @Override
+    public void run(String... args) {
+        if (!seed) return;
+        populate();
+    }
 }

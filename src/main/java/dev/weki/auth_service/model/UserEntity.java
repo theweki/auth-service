@@ -17,7 +17,8 @@ import java.util.List;
 @Builder
 @Data
 public class UserEntity {
-    @MongoId(FieldType.STRING)
+
+    @MongoId(value = FieldType.OBJECT_ID)
     private String id;
 
     private String name;
